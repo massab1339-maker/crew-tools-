@@ -1,5 +1,3 @@
-
-
 import { GoogleGenAI, Chat, GenerateContentResponse, Content } from "@google/genai";
 import { MODEL_NAME, SYSTEM_INSTRUCTION, THUMBNAIL_DESIGNER_INSTRUCTION, MAGIC_AI_LOGO_PROMPT } from '../constants';
 
@@ -11,7 +9,7 @@ export const createChatSession = (history?: Content[]): Chat => {
     model: MODEL_NAME,
     config: {
       systemInstruction: SYSTEM_INSTRUCTION,
-      temperature: 0.7, // Creative but focused
+      temperature: 0.7,
     },
     history: history,
   });
@@ -32,43 +30,33 @@ export const sendMessageStream = async (
 
 export const generateThumbnailDesign = async (prompt: string): Promise<any> => {
   try {
+    // Using Pro model for complex layout generation
     const response = await ai.models.generateContent({
-      model: MODEL_NAME,
+      model: 'gemini-3-pro-preview',
       contents: prompt,
       config: {
         systemInstruction: THUMBNAIL_DESIGNER_INSTRUCTION,
-        responseMimeType: "application/json", // Force JSON mode
-        temperature: 0.5, // More deterministic for layouts
+        responseMimeType: "application/json",
+        temperature: 0.4, 
       }
     });
 
     let text = response.text;
     if (!text) throw new Error("No response from AI");
     
-    // --- ROBUST JSON EXTRACTION ---
-    // 1. Remove Markdown code blocks
+    // Cleanup JSON
     text = text.replace(/```json/gi, '').replace(/```/g, '').trim();
-
-    // 2. Find the JSON object boundaries
     const firstBrace = text.indexOf('{');
     const lastBrace = text.lastIndexOf('}');
-
     if (firstBrace !== -1 && lastBrace !== -1) {
       text = text.substring(firstBrace, lastBrace + 1);
     }
 
-    // 3. Fix specific double-quote syntax error (e.g., ""width":)
-    text = text.replace(/""([^"]+)"\s*:/g, '"$1":');
-
-    // 4. Remove trailing commas before closing braces/brackets
-    text = text.replace(/,(\s*[}\]])/g, '$1');
-
-    // Parse JSON safely
     try {
       return JSON.parse(text);
     } catch (e) {
       console.error("Failed to parse JSON", text);
-      throw new Error("AI returned invalid JSON");
+      throw new Error("AI returned invalid JSON structure");
     }
   } catch (error) {
     console.error("Error generating thumbnail design:", error);
@@ -80,7 +68,6 @@ export const generateLogo = async (brand: string): Promise<string> => {
   try {
     const prompt = MAGIC_AI_LOGO_PROMPT.replace('{BRAND}', brand);
     
-    // Using gemini-2.5-flash-image as per instructions for general image generation
     const response = await ai.models.generateContent({
       model: 'gemini-2.5-flash-image',
       contents: {

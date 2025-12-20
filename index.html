@@ -6,6 +6,10 @@
     <title>SocialStrategist AI</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Oswald:wght@700&family=Playfair+Display:ital,wght@1,600&family=Orbitron:wght@700&family=Permanent+Marker&display=swap" rel="stylesheet">
+    <script>
+      // Shim process.env for browser compatibility in production/Vercel
+      window.process = window.process || { env: {} };
+    </script>
     <style>
       body {
         font-family: 'Inter', sans-serif;
