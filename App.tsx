@@ -19,7 +19,7 @@ function App() {
                   <Sparkles className="w-6 h-6 md:w-8 md:h-8" />
               </div>
               <h1 className="text-3xl md:text-5xl font-bold text-slate-900 mb-2 md:mb-4 tracking-tight">
-                  Welcome to Crew Tools
+                  Welcome to Creo Tools
               </h1>
               <p className="text-base md:text-lg text-slate-600 max-w-xl mx-auto px-2">
                   The ultimate creator toolkit. Generate professional strategies or design viral thumbnails in seconds.
@@ -29,7 +29,6 @@ function App() {
           {/* Selection Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
               
-              {/* Social Strategic Option */}
               <button 
                   onClick={() => setMode('chat')}
                   className="group relative bg-blue-600 rounded-3xl p-5 md:p-8 border border-blue-500 shadow-lg shadow-blue-900/20 hover:shadow-xl hover:shadow-blue-900/30 transition-all duration-300 hover:-translate-y-1 text-left overflow-hidden"
@@ -57,7 +56,6 @@ function App() {
                   </div>
               </button>
 
-              {/* Thumbnail Maker Option */}
               <button 
                   onClick={() => setMode('thumbnail')}
                   className="group relative bg-pink-600 rounded-3xl p-5 md:p-8 border border-pink-500 shadow-lg shadow-pink-900/20 hover:shadow-xl hover:shadow-pink-900/30 transition-all duration-300 hover:-translate-y-1 text-left overflow-hidden"
@@ -88,17 +86,15 @@ function App() {
           </div>
 
           <div className="mt-8 md:mt-12 text-center text-xs md:text-sm text-slate-400">
-              © 2025 Crew Tools. Powered by Massab.
+              © 2025 Creo Tools. Powered by Massab.
           </div>
         </div>
       </div>
 
-      {/* Chat Interface - Persisted in DOM */}
       <div className={`fixed inset-0 z-50 bg-white ${mode === 'chat' ? '' : 'hidden'}`}>
         <ChatInterface onBack={() => setMode('home')} />
       </div>
 
-      {/* Thumbnail Maker - Persisted in DOM */}
       <div className={`fixed inset-0 z-50 bg-slate-100 ${mode === 'thumbnail' ? '' : 'hidden'}`}>
         <ThumbnailMaker onBack={() => setMode('home')} />
       </div>
