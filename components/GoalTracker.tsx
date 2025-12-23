@@ -155,7 +155,14 @@ const GoalTracker: React.FC<GoalTrackerProps> = ({ onBack }) => {
   };
 
   const handleUpdateProgress = (id: string, newValue: number) => {
-    setGoals(goals.map(g => g.id === id ? { ...g, currentValue: newValue } : g));
+    setGoals(goals.map(g => {
+      if (g.id === id) {
+        // Enforce the cap: Value cannot exceed targetValue
+        const cappedValue = Math.min(newValue, g.targetValue);
+        return { ...g, currentValue: cappedValue };
+      }
+      return g;
+    }));
   };
 
   const handleSetNewTarget = (id: string) => {
@@ -331,7 +338,7 @@ const GoalTracker: React.FC<GoalTrackerProps> = ({ onBack }) => {
                           <input 
                             type="range"
                             min="0"
-                            max={Math.max(goal.targetValue, goal.currentValue) * 1.5}
+                            max={goal.targetValue}
                             step="1"
                             value={goal.currentValue}
                             onChange={(e) => handleUpdateProgress(goal.id, Number(e.target.value))}
@@ -340,6 +347,8 @@ const GoalTracker: React.FC<GoalTrackerProps> = ({ onBack }) => {
                           <div className="mt-4 flex gap-2">
                             <input 
                               type="number"
+                              min="0"
+                              max={goal.targetValue}
                               value={goal.currentValue}
                               onChange={(e) => handleUpdateProgress(goal.id, Number(e.target.value))}
                               className="flex-1 bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
