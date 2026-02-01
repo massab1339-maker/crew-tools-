@@ -242,7 +242,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onBack }) => {
                     <ArrowLeft size={18} />
                 </button>
                 <h1 className="font-bold text-lg bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent truncate">
-                    SocialStrategist
+                    Massab Tools
                 </h1>
             </div>
             <button 

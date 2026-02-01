@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { MessageSquare, Sparkles, Target, TrendingUp } from 'lucide-react';
 import { AppMode } from './types';
@@ -19,7 +20,7 @@ function App() {
                   <Sparkles className="w-6 h-6 md:w-8 md:h-8" />
               </div>
               <h1 className="text-3xl md:text-5xl font-bold text-slate-900 mb-2 md:mb-4 tracking-tight">
-                  Welcome to Creo Tools
+                  Welcome to Massab Tools
               </h1>
               <p className="text-base md:text-lg text-slate-600 max-w-xl mx-auto px-2">
                   The ultimate creator toolkit. Generate strategies and track your path to social stardom.
@@ -94,7 +95,7 @@ function App() {
           </div>
 
           <div className="mt-12 md:mt-16 text-center text-xs md:text-sm text-slate-400">
-              © 2025 Creo Tools. Powered by Massab.
+              © 2025 Massab Tools. All rights reserved.
           </div>
         </div>
       </div>
