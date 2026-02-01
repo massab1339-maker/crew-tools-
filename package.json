@@ -1,8 +1,13 @@
+
 {
-  "name": "social-strategist-ai",
+  "name": "massab-tools",
   "private": true,
   "version": "1.0.0",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rohailhayat146/massab-tools.git"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
